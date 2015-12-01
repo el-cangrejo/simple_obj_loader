@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dimitris/Documents/Thesis/Project_Obj/src/objloader.cpp
+Obj.hpp
+/home/dimitris/Documents/Thesis/Project_Obj/src/Obj.hpp
+
+include/Obj.hpp
+GL/glut.h
+-
+iostream
+-
+fstream
+-
+vector
+-
+sstream
+-
+string
+-
+cmath
+-
+
