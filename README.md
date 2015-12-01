@@ -9,3 +9,6 @@ Loads an .obj file and displays it using opengl
 * Use 't' to display the filled triangles 
 * Use 'n' to display the normals  
 * Use 'm' to remove the normals 
+
+currently supports only Vertex Normal Indices Without Texture Coordinate Indices
+does not support texture coordinates
