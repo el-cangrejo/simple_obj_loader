@@ -71,11 +71,15 @@ void RenderScene(void)
 
   if ( normal == true )
   {
-    for (int i = 0; i < normals.size(); ++i)
+    for (int i = 0; i < pairs1.size(); ++i)
     {
+      Vertex vert = vertices[pairs1[i].v];
+      Vertex norm = normals[pairs1[i].n];
+      glColor3f(1.0, 1.0, 0.0);    
+
       glBegin(GL_LINES);
-      glVertex3f( vertices[i].x/60, vertices[i].y/60, vertices[i].z/60);
-      glVertex3f( vertices[i].x/60 + normals[i].x/60, vertices[i].y/60 + normals[i].y/60, vertices[i].z/60 + normals[i].z/60);
+      glVertex3f( vert.x/60, vert.y/60, vert.z/60);
+      glVertex3f( vert.x/60 + norm.x/60, vert.y/60 + norm.y/60, vert.z/60 + norm.z/60);
       glEnd();
     }
   }
@@ -108,7 +112,14 @@ void KeyEvent(unsigned char key, int x, int y)
     break;
 
     case 'n' :
-    normal = true;
+    if ( !normals.empty())
+    {
+      normal = true;
+    }
+    else
+    {
+      cout << "There are no normals!" << endl; 
+    }
     break;
 
     case 'm' :
@@ -175,7 +186,16 @@ int main(int argc, char **argv)
         char s1, s2;
         in >> v1 >> s1 >> s2 >> n1 >> v2 >> s1 >> s2 >> n2 >> v3 >> s1 >> s2 >> n3;
         //in >> v1 >> v3 >> v5;
+        Pair p1(v1- 1, n1 - 1);
+        Pair p2(v2- 1, n2 - 1);
+        Pair p3(v3- 1, n3 - 1);
+
+        pairs.push_back(p1);
+        pairs.push_back(p2);
+        pairs.push_back(p3);
+        
         Triangle t( vertices[v1 - 1], vertices[v2 - 1], vertices[v3 - 1]);
+        
         triangles.push_back(t);
       }
     }
@@ -183,9 +203,13 @@ int main(int argc, char **argv)
     objecttext.close(); 
   }
   
+  std::sort(pairs.begin(), pairs.end(), [](const Pair& p1, const Pair& p2) -> bool{ return p1.v > p2.v; });
+  std::unique_copy(pairs.begin(), pairs.end(), std::back_inserter(pairs1),
+                     [](const Pair& p1, const Pair& p2){ return p1.v == p2.v ; });
+
   std::cout << " Object size = " << vertices.size() << " vertices" << std::endl;
   std::cout << " Object size = " << triangles.size() << " triangles" << std::endl;
-  std::cout << " Object size = " << normals.size() << " normals" << std::endl;
+  std::cout << " Object size = " << pairs1.size() << " normals" << std::endl;
   
   diffz = 1;
   diffx = 1;
