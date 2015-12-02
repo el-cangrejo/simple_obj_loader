@@ -8,7 +8,7 @@ void RenderScene(void)
 
   glLoadIdentity();
 
-  gluLookAt(0.05*sin(diffx), 0, 0.05*cos(diffz),
+  gluLookAt(0.2*sin(diffx), 0, 0.2*cos(diffz),
             0, 0, 0,
             0, 1, 0);
 
@@ -31,6 +31,22 @@ void RenderScene(void)
       glVertex3f( triangles[i].v1.x/60, triangles[i].v1.y/60, triangles[i].v1.z/60);
       glVertex3f( triangles[i].v2.x/60, triangles[i].v2.y/60, triangles[i].v2.z/60);
       glVertex3f( triangles[i].v3.x/60, triangles[i].v3.y/60, triangles[i].v3.z/60);    
+      glEnd();
+    }
+    glColor3f(0.0, 1.0, 0.0);    
+    for (int i = 0; i < triangles.size(); ++i)
+    {
+      glBegin(GL_LINES);
+      glVertex3f( triangles[i].v1.x/60, triangles[i].v1.y/60, triangles[i].v1.z/60);
+      glVertex3f( triangles[i].v2.x/60, triangles[i].v2.y/60, triangles[i].v2.z/60);
+      glEnd();
+      glBegin(GL_LINES);
+      glVertex3f( triangles[i].v2.x/60, triangles[i].v2.y/60, triangles[i].v2.z/60);
+      glVertex3f( triangles[i].v3.x/60, triangles[i].v3.y/60, triangles[i].v3.z/60);
+      glEnd();
+      glBegin(GL_LINES);
+      glVertex3f( triangles[i].v3.x/60, triangles[i].v3.y/60, triangles[i].v3.z/60);
+      glVertex3f( triangles[i].v1.x/60, triangles[i].v1.y/60, triangles[i].v1.z/60);
       glEnd();
     }
   }
@@ -155,10 +171,11 @@ int main(int argc, char **argv)
         normals.push_back(vn);
       }
       else if( type == "f"){
-        int v1, v2, v3, v4, v5, v6;
+        int v1, v2, v3, n1, n2, n3;
         char s1, s2;
-        in >> v1 >> s1 >> s2 >> v2 >> v3 >> s1 >> s2 >> v4 >> v5;
-        Triangle t( vertices[v1 - 1], vertices[v3 - 1], vertices[v5 - 1]);
+        in >> v1 >> s1 >> s2 >> n1 >> v2 >> s1 >> s2 >> n2 >> v3 >> s1 >> s2 >> n3;
+        //in >> v1 >> v3 >> v5;
+        Triangle t( vertices[v1 - 1], vertices[v2 - 1], vertices[v3 - 1]);
         triangles.push_back(t);
       }
     }
@@ -168,6 +185,7 @@ int main(int argc, char **argv)
   
   std::cout << " Object size = " << vertices.size() << " vertices" << std::endl;
   std::cout << " Object size = " << triangles.size() << " triangles" << std::endl;
+  std::cout << " Object size = " << normals.size() << " normals" << std::endl;
   
   diffz = 1;
   diffx = 1;
