@@ -1,1 +1,1 @@
-/usr/bin/c++       CMakeFiles/Objloader.dir/src/objloader.cpp.o  -o Objloader -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi 
+/usr/bin/c++    -std=c++11    CMakeFiles/Objloader.dir/src/objloader.cpp.o  -o Objloader -rdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lglut -lXmu -lXi 
