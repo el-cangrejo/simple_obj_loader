@@ -15,67 +15,54 @@
 using std::cout;
 using std::endl;
 
-class Vertex
-{
+class Vertex {
 public:
-	float x;
+	Vertex ();
+	Vertex (float, float, float);
+	Vertex (const Vertex&);
+	virtual ~Vertex ();
+
+  	float x;
 	float y;
 	float z;
-	Vertex();
-	Vertex(float x, float y, float z);
-	Vertex(const Vertex& v);
-	virtual ~Vertex();
-};
-
-class Edge
-{
-	Vertex vert1;	
-	Vertex vert2;
-public:
-	Edge(Vertex v1, Vertex v2);
-	Edge();
-	virtual ~Edge();
 };
 
 class Triangle
 {
 public:
+	Triangle ();
+	Triangle (Vertex, Vertex, Vertex);
+	Triangle (const Triangle&);
+	virtual ~Triangle ();
+
 	Vertex v1;
 	Vertex v2;
 	Vertex v3;
-	Triangle();
-	Triangle(Vertex v1, Vertex v2, Vertex v3);
-	Triangle(const Triangle& t);
-	virtual ~Triangle();
 };
 
 class Pair
 {
 public:
-	Pair(int x, int y);
-	~Pair();
+	Pair (int, int);
+	~Pair ();
 
 	int v;
 	int n;
 };
 
 
-Vertex::Vertex( float x , float y, float z ) : x(x), y(y), z(z) {}
-Vertex::Vertex() : x(0), y(0), z(0) {}
-Vertex::Vertex( const Vertex& v ) : x(v.x), y(v.y), z(v.z) {}
-Vertex::~Vertex() {}
+Vertex::Vertex (float x, float y, float z) : x(x), y(y), z(z) {}
+Vertex::Vertex () : x(0), y(0), z(0) {}
+Vertex::Vertex (const Vertex& v) : x(v.x), y(v.y), z(v.z) {}
+Vertex::~Vertex () {}
 
-Edge::Edge( Vertex v1 , Vertex v2 ) : vert1(v1), vert2(v2) {}
-Edge::Edge( ) : vert1(), vert2() {}
-Edge::~Edge() {}
+Triangle::Triangle () : v1(Vertex(0, 0, 0)), v2(Vertex(0, 0, 0)), v3(Vertex(0, 0, 0)) {}
+Triangle::Triangle (Vertex v1, Vertex v2, Vertex v3) : v1(v1), v2(v2), v3(v3) {}
+Triangle::Triangle (const Triangle& t) : v1( t.v1 ), v2( t.v2 ), v3( t.v3 ) {}
+Triangle::~Triangle () {}
 
-Triangle::Triangle() : v1(Vertex(0, 0, 0)), v2(Vertex(0, 0, 0)), v3(Vertex(0, 0, 0)) {}
-Triangle::Triangle(Vertex v1, Vertex v2, Vertex v3) : v1(v1), v2(v2), v3(v3) {}
-Triangle::Triangle(const Triangle& t) : v1( t.v1 ), v2( t.v2 ), v3( t.v3 ) {}
-Triangle::~Triangle() {}
-
-Pair::Pair(int x, int y) : v(x), n(y) {}
-Pair::~Pair() {}
+Pair::Pair (int x, int y) : v(x), n(y) {}
+Pair::~Pair () {}
 
 std::ifstream objecttext;
 std::string gline;
