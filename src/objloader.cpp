@@ -148,7 +148,7 @@ int main (int argc, char **argv) {
         in >> v1 >> s1 >> s2 >> n1;
         in >> v2 >> s1 >> s2 >> n2; 
         in >> v3 >> s1 >> s2 >> n3;
-        //in >> v1 >> v2 >> v3;
+        //in >> v1 >> v2 >> v3; // For b66_L2.obj file 
         Pair p1(v1- 1, n1 - 1);
         Pair p2(v2- 1, n2 - 1);
         Pair p3(v3- 1, n3 - 1);
