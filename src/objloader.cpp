@@ -23,20 +23,16 @@ void RenderScene (void) {
     }
     glEnd();
     glColor3f(0.0, 1.0, 0.0);    
-    for (const auto& triangle : triangles) {
-      glBegin(GL_LINES);
+    glBegin(GL_LINES);
+    for (const auto& triangle : triangles) {  
       glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
       glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
-      glEnd();
-      glBegin(GL_LINES);
       glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
       glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
-      glEnd();
-      glBegin(GL_LINES);
       glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
       glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
-      glEnd();
     }
+    glEnd();
   } else if (line == true) {
     glBegin(GL_LINES);
     for (const auto& triangle : triangles) {
