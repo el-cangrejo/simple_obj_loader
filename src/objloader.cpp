@@ -12,38 +12,38 @@ void RenderScene (void) {
   if (point == true) {
     glBegin(GL_POINTS);      
     for (const auto& vertex : vertices) 
-      glVertex3f( vertex.x/60, vertex.y/60, vertex.z/60);
+      glVertex3f( vertex.x/scale, vertex.y/scale, vertex.z/scale);
     glEnd();
   } else if (triangle == true) {
     glBegin(GL_TRIANGLES);
     for (const auto& triangle : triangles) {
-      glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
-      glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
-      glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);    
+      glVertex3f(triangle.v1.x/scale, triangle.v1.y/scale, triangle.v1.z/scale);
+      glVertex3f(triangle.v2.x/scale, triangle.v2.y/scale, triangle.v2.z/scale);
+      glVertex3f(triangle.v3.x/scale, triangle.v3.y/scale, triangle.v3.z/scale);    
     }
     glEnd();
     glColor3f(0.0, 1.0, 0.0);    
     glBegin(GL_LINES);
     for (const auto& triangle : triangles) {  
-      glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
-      glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
-      glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
-      glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
-      glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
-      glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
+      glVertex3f(triangle.v1.x/scale, triangle.v1.y/scale, triangle.v1.z/scale);
+      glVertex3f(triangle.v2.x/scale, triangle.v2.y/scale, triangle.v2.z/scale);
+      glVertex3f(triangle.v2.x/scale, triangle.v2.y/scale, triangle.v2.z/scale);
+      glVertex3f(triangle.v3.x/scale, triangle.v3.y/scale, triangle.v3.z/scale);
+      glVertex3f(triangle.v3.x/scale, triangle.v3.y/scale, triangle.v3.z/scale);
+      glVertex3f(triangle.v1.x/scale, triangle.v1.y/scale, triangle.v1.z/scale);
     }
     glEnd();
   } else if (line == true) {
     glBegin(GL_LINES);
     for (const auto& triangle : triangles) {
-      glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
-      glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
+      glVertex3f(triangle.v1.x/scale, triangle.v1.y/scale, triangle.v1.z/scale);
+      glVertex3f(triangle.v2.x/scale, triangle.v2.y/scale, triangle.v2.z/scale);
       
-      glVertex3f(triangle.v2.x/60, triangle.v2.y/60, triangle.v2.z/60);
-      glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
+      glVertex3f(triangle.v2.x/scale, triangle.v2.y/scale, triangle.v2.z/scale);
+      glVertex3f(triangle.v3.x/scale, triangle.v3.y/scale, triangle.v3.z/scale);
       
-      glVertex3f(triangle.v3.x/60, triangle.v3.y/60, triangle.v3.z/60);
-      glVertex3f(triangle.v1.x/60, triangle.v1.y/60, triangle.v1.z/60);
+      glVertex3f(triangle.v3.x/scale, triangle.v3.y/scale, triangle.v3.z/scale);
+      glVertex3f(triangle.v1.x/scale, triangle.v1.y/scale, triangle.v1.z/scale);
     }
     glEnd();
   }
@@ -54,8 +54,8 @@ void RenderScene (void) {
       Vertex vert = vertices[pair.v];
       Vertex norm = normals[pair.n];
       glColor3f(1.0, 1.0, 0.0);    
-      glVertex3f(vert.x/60, vert.y/60, vert.z/60);
-      glVertex3f(vert.x/60 + norm.x/60, vert.y/60 + norm.y/60, vert.z/60 + norm.z/60);
+      glVertex3f(vert.x/scale, vert.y/scale, vert.z/scale);
+      glVertex3f(vert.x/scale + norm.x/scale, vert.y/scale + norm.y/scale, vert.z/scale + norm.z/scale);
     }
     glEnd();
   }
@@ -148,10 +148,10 @@ int main (int argc, char **argv) {
         in >> v1 >> s1 >> s2 >> n1;
         in >> v2 >> s1 >> s2 >> n2; 
         in >> v3 >> s1 >> s2 >> n3;
-        //in >> v1 >> v2 >> v3; // For b66_L2.obj file 
-        Pair p1(v1- 1, n1 - 1);
-        Pair p2(v2- 1, n2 - 1);
-        Pair p3(v3- 1, n3 - 1);
+        //in >> v1 >> v2 >> v3; // For b66_L2.obj, icosahedron.obj file 
+        Pair p1(v1 - 1, n1 - 1);
+        Pair p2(v2 - 1, n2 - 1);
+        Pair p3(v3 - 1, n3 - 1);
 
         pairs.push_back(p1);
         pairs.push_back(p2);
@@ -169,12 +169,13 @@ int main (int argc, char **argv) {
   std::unique_copy(pairs.begin(), pairs.end(), std::back_inserter(pairs1), 
     [](const Pair& p1, const Pair& p2){ return p1.v == p2.v; });
 
-  std::cout << " Object size = " << vertices.size() << " vertices \n";
-  std::cout << " Object size = " << triangles.size() << " triangles \n";
-  std::cout << " Object size = " << pairs1.size() << " normals \n";
+  std::cout << "Object size = " << vertices.size() << " vertices \n";
+  std::cout << "Object size = " << triangles.size() << " triangles \n";
+  std::cout << "Object size = " << pairs1.size() << " normals \n";
   
   diffz = 1;
   diffx = 1;  
+  scale = 60;
   point = true;
   normal = false;
 

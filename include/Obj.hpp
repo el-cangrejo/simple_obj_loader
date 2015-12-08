@@ -88,6 +88,8 @@ std::vector<Pair> pairs1;
 int diffx;
 int diffz;
 
+int scale;
+
 bool point, line, triangle, normal;
 
 #endif // OBJ_HPP
