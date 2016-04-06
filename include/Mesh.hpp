@@ -11,7 +11,7 @@ public:
 	void fittoUnitSphere(void);
 	void movetoCenter(void);
 
-	virtual ~Mesh();
+	virtual ~Mesh(void);
 
 	Vertex centroid;
 

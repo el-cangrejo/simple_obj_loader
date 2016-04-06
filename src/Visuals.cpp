@@ -1,7 +1,6 @@
-#include "graphics.hpp"
+#include "Visuals.hpp"
 
-Mesh qmesh, tmesh;
-extern const std::vector<int> vidx;
+Mesh mesh;
 
 // Display variables
 static bool showVerts = true;
@@ -194,99 +193,6 @@ void drawMesh(Mesh &mesh) {
   glFlush();
 }
 
-void drawGrid(float step_x, float step_y, float step_z) {
-
-  Vertex max(0., 0., 0.);
-  Vertex min(1., 1., 1.);
-
-  for (const auto& v : qmesh.vertices) {
-    if (v.x >= max.x) max.x = v.x;
-    if (v.y >= max.y) max.y = v.y;
-    if (v.z >= max.z) max.z = v.z;
-    if (v.x <= min.x) min.x = v.x;
-    if (v.y <= min.y) min.y = v.y;
-    if (v.z <= min.z) min.z = v.z;
-  }
-
-  /*
-  glPushMatrix();
-    glTranslatef(max.x, max.y, max.z);
-    glColor3f(1.0, 0.0, 0.0);
-    glutWireSphere(0.1, 10, 10);
-  glPopMatrix();
-
-  glPushMatrix();
-    glTranslatef(min.x, min.y, min.z);
-    glColor3f(1.0, 0.0, 0.0);
-    glutWireSphere(0.1, 10, 10);
-  glPopMatrix();
-  //*/
-
-  float max_dist = std::max({fabs(max.x - min.x),
-                             fabs(max.y - min.y),
-                             fabs(max.z - min.z)});
-
-  int dim_x = ceil(fabs(max.x - min.x) / step_x);
-  int dim_y = ceil(fabs(max.y - min.y) / step_y);
-  int dim_z = ceil(fabs(max.z - min.z) / step_z);
-
-  //std::cout << "Grid size = " << dim_x << " * " << dim_y << " * " << dim_z << "\n";
-
-  float displacement_x = min.x + step_x / 2;
-  float displacement_y = min.y + step_y / 2;
-  float displacement_z = min.z + step_z / 2;
-
-  glTranslatef(displacement_x, displacement_y, displacement_z);
-
-  //*
-  auto v_idx = vidx.begin();
-  for (int grid_x = 0; grid_x < dim_x; ++grid_x) {
-    for (int grid_y = 0; grid_y < dim_y; ++grid_y) {
-      for (int grid_z = 0; grid_z < dim_z; ++grid_z) {
-        if (*v_idx) {
-          glPushMatrix();
-            glColor3f((float)3  / grid_x, 
-                      (float)3  / grid_y, 
-                      (float)3  / grid_z);
-            glTranslatef(grid_x * step_x, grid_y * step_y, grid_z * step_z);
-            glutWireCube(step_x);
-          glPopMatrix();
-        }
-        v_idx++;
-      }
-    }
-  }
-  //*/
-
-  /*
-  auto v_idx = vidx.begin();
-
-  float radius = sqrt(pow(step_x / 2., 2) +
-                      pow(step_y / 2., 2) +
-                      pow(step_z / 2., 2));
-
-  for (int grid_x = 0; grid_x < dim_x; ++grid_x) {
-    for (int grid_y = 0; grid_y < dim_y; ++grid_y) {
-      for (int grid_z = 0; grid_z < dim_z; ++grid_z) {
-        if (*v_idx) {
-          glPushMatrix();
-            glColor3f(1.0, 1.0, 0.0);
-            //glColor3f(grid_x / dim_x, grid_y / dim_y, grid_z / dim_z);
-            //std::cout << "Color is " << grid_x / (float)dim_x << " "
-                      //<< grid_y / (float)dim_y << " "
-                      //<< grid_z / (float)dim_z << "\n";
-            glTranslatef(grid_x * step_x, grid_y * step_y, grid_z * step_z);
-            glutWireSphere(radius, 15, 5);
-          glPopMatrix();
-        }
-        v_idx++;
-      }
-    }
-  }
-  std::cout << "grid :: " << dim_x * dim_y * dim_z << "\n";
-  //*/
-}
-
 void drawAxis() {
 
     glPushMatrix();
@@ -341,43 +247,6 @@ void renderScene(void) {
             up_vector.y,
             up_vector.z);
   
-  float grid_size(0.05);
-
-  //*/
-  glPushMatrix();
-    //glTranslatef(0.4, 0, 0);
-    //glScalef(1/3., 1/3., 1/3.);
-    //glRotatef(angle_x, 0, 1, 0);
-    // if (query_object) {
-    //   drawMesh(qmesh);
-    //   //drawGrid(grid_size, grid_size, grid_size);
-    // }
-    drawMesh(qmesh);
-
-    if (showGrid) drawGrid(grid_size, grid_size, grid_size);
-
-  glPopMatrix();
-  //*/
-
-  //*
-  glPushMatrix();
-    glTranslatef(-0.4, 0, 0);
-    glScalef(1/3., 1/3., 1/3.);
-    glRotatef(angle_x, 0, 1, 0);
-    //if (target_object1)
-    //drawMesh(tmesh);
-  glPopMatrix();
-  //*/
-  glPushMatrix();
-    glTranslatef(-0.5, -0.5, -0.5);
-    glScalef(1/3., 1/3., 1/3.);
-    drawAxis();
-  glPopMatrix();
-
-  if (sphere) {
-    glColor3f(1.0, 1.0, 0.0);
-    glutWireSphere(1.0,50,50);
-  }
 }
 
 void mouseClick(int button, int state, int x, int y) {
