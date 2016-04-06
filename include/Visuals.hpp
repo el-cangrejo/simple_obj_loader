@@ -22,14 +22,11 @@ void drawAxis();
 
 // OpenGL Handling Functions
 void renderScene(void);
-void idle(int );
 void resize(int, int);
 
 // Event Handling Functions
 void mouseClick(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 void keyboardDown(unsigned char key, int x, int y);
-
-void initializeGL();
 
 #endif // VISUALS_HPP

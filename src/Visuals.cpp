@@ -237,7 +237,6 @@ void drawAxis() {
 }
 
 void renderScene(void) {
-  
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -247,6 +246,8 @@ void renderScene(void) {
             up_vector.y,
             up_vector.z);
   
+  drawMesh (mesh);
+  drawAxis ();
 }
 
 void mouseClick(int button, int state, int x, int y) {
@@ -374,12 +375,6 @@ void mouseMotion(int x, int y) {
 
     glutPostRedisplay();
   }
-}
-
-void idle(int x) {
-  angle_x += rot_step;
-  glutPostRedisplay();
-  glutTimerFunc(10, idle, 0);
 }
 
 void resize(int w, int h) {
