@@ -1,3 +1,6 @@
+#include <vector>
+#include <string>
+
 class Mesh {
 public:	
 	Mesh(void);
