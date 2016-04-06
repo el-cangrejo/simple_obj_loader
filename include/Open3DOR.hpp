@@ -1,10 +1,6 @@
 #ifndef OPEN3DOR_HPP
 #define OPEN3DOR_HPP
 
-#include <pcl/point_types.h>
-#include <pcl/features/fpfh.h>
-#include <armadillo>
-
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -78,46 +74,9 @@ public:
 	int v3;
 };
 
-class Mesh {
-public:	
-	Mesh(void);
-	
-	void computeDualVertices(void);
-	void computeDualEdges(void);
-	void computeAdjacency(void);
-	void computeDualAdjacency(void);
-	void findNeighbors(void);
-	std::vector<int> findNearestNeighbors(int, float);
-	void computeNormals(void);
-	void computeFPFH(void);
-	void computeFV(void);
-	void fittoUnitSphere(void);
-	void movetoCenter(void);
-	Mesh gridFilter(float, float, float);
 
-	~Mesh();
-
-	Vertex centroid;
-	std::vector<Vertex> vertices;
-	std::vector<Triangle> triangles;
-	std::vector<Vertex> normals;
-	std::vector<std::vector<float>> fpfhist;
-	std::vector<std::vector<float>> fisher_vector;
-	
-	std::vector<Vertex> dvertices;
-	std::vector<Vertex> trinormals;
-	std::vector<Edge> edges;
-	std::vector<Edge> dedges;
-	std::vector<std::vector<int>> neighbors;
-};
 
 void read_mesh(const std::string, Mesh&);
 void preprocess_mesh(Mesh&);
-float local_distance(const Mesh&, const Mesh&);
-float dist_L1(const std::vector<float>& , const std::vector<float>&);
-int find_type(const std::string); 
-void save_descriptors(const std::string , const Mesh&);
-void load_descriptors(const std::string , Mesh&);
-void preprocess_database();
 
 #endif // OPEN3DOR_HPP
