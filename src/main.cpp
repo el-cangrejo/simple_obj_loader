@@ -20,28 +20,28 @@ int main(int argc, char *argv[])
   mesh.movetoCenter ();
   mesh.fittoUnitSphere ();
 
-	// glutInit (&argc, argv);  
- //  glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
- //  glutInitWindowPosition (50,25);
- //  glutInitWindowSize (900,620); //w h
- //  glutCreateWindow ("OpenGL Window");
- //  glClearColor (.9,.9,.9,0.0); 
+  glutInit (&argc, argv);  
+  glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitWindowPosition (50,25);
+  glutInitWindowSize (900,620); //w h
+  glutCreateWindow ("OpenGL Window");
+  glClearColor (.9,.9,.9,0.0); 
   
- //  initializeGL ();
+  initializeGL ();
 
- //  // GLUT Display Function
- //  glutDisplayFunc (renderScene);
- //  glutReshapeFunc (resize);
+  // GLUT Display Function
+  glutDisplayFunc (renderScene);
+  glutReshapeFunc (resize);
 
- //  // Keyboard handlers
- //  glutKeyboardFunc (keyboardDown);
+  // Keyboard handlers
+  glutKeyboardFunc (keyboardDown);
   
- //  // Mouse handlers
- //  glutMouseFunc (mouseClick);
- //  glutMotionFunc (mouseMotion);
+  // Mouse handlers
+  glutMouseFunc (mouseClick);
+  glutMotionFunc (mouseMotion);
   
- //  // GLUT Main Lopp
- //  glutMainLoop ();
+  // GLUT Main Lopp
+  glutMainLoop ();
 	
 	return 0;
 }
