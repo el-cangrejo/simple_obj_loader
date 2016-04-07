@@ -4,20 +4,20 @@
 #include "Mesh.hpp"
 #include <GL/glut.h>
 
-#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <ctime>
 #include <fstream>
-#include <vector>
+#include <iostream>
+#include <iterator>
 #include <sstream>
 #include <string>
-#include <cmath>
-#include <algorithm>
-#include <iterator>
-#include <ctime>
+#include <vector>
 
 #define PI 3.1415927
 
 // Drawing Functions
-void drawMesh(Mesh&);
+void drawMesh(Mesh &);
 void drawAxis();
 
 // OpenGL Handling Functions
