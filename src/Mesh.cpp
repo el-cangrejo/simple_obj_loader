@@ -126,3 +126,15 @@ void Mesh::movetoCenter(void) {
   	v = v - centroid;
   }
 }
+
+void Mesh::print(void) {
+  // Prints Information about the mesh
+  std::cout << "Object size : \n"
+  << this->vertices.size() << " vertices \n"
+  << this->triangles.size() << " triangles \n"
+  << this->edges.size() << " edges \n"
+  << this->normals.size() << " normals \n"
+  << this->dvertices.size() << " dvertices \n"
+  << this->dedges.size() << " dedges \n"
+  << this->trinormals.size() << " trinormals \n";
+}

@@ -19,7 +19,7 @@ static bool showGrid = false;
 
 // Camera variables
 static float rotFactor = 0.01;
-static float zoomStep = 0.01;
+static float zoomStep = 0.1;
 static float cdist = 2;
 static float eyex = 0.0;
 static float eyey = 0.0;
@@ -187,14 +187,10 @@ void drawMesh(Mesh &mesh) {
     glEnd();
   }
 
-  //debug_nn(mesh);
-
-  //glutSwapBuffers();
   glFlush();
 }
 
 void drawAxis() {
-
     glPushMatrix();
         glColor3f(0.0, 0.0, 0.0);
         glutSolidSphere(0.05, 10, 10);
@@ -290,17 +286,14 @@ void keyboardDown(unsigned char key, int x, int y) {
     break;
     }
   case 'v' : {
-    std::cout << "Showing Vertices \n";
     showVerts = !showVerts;
     break;
     }
   case 'l' : {
-    std::cout << "Showing Lines \n";
     showLines = !showLines;
     break;
     }
   case 't' : {
-    std::cout << "Showing Triangles \n";
     showTriangles = !showTriangles;
     break;
     }
@@ -317,32 +310,11 @@ void keyboardDown(unsigned char key, int x, int y) {
     break;
     }
   case 'n' : {
-    std::cout << "Showing Normals \n";
     showNormals = !showNormals;
-    break;
-    }
-  case 'z' : {
-    sphere = !sphere;
     break;
     }
   case 'b' : {
     showTriNormals = !showTriNormals;
-    break;
-    }
-  case 'Q' : {
-    query_object = !query_object;
-    break;
-    }
-  case 'T' : {
-    target_object1 = !target_object1;
-    break;
-    }
-  case 'Y' : {
-    target_object2 = !target_object2;
-    break;
-    }
-  case 'G' : {
-    showGrid = !showGrid;
     break;
     }
   default : {
@@ -392,12 +364,4 @@ void resize(int w, int h) {
   gluPerspective(45, (float)w/h, 0.01, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-}
-
-void initializeGL() {
-  glClearColor(0.9, 0.9, 0.9, 0.0);
-  glEnable(GL_DEPTH_TEST);
-  glEnable(GL_LIGHT0);
-  glEnable(GL_LIGHTING);
-  glEnable(GL_COLOR_MATERIAL);
 }

@@ -19,6 +19,7 @@ int loadObj(const std::string filepath, Mesh& mesh) {
   std::vector<Vertex> std_normals;
   // Reads .obj File
   objfile.open(filepath);
+
   if (objfile.is_open()) {
     std::cout << "Started reading " << filepath << "\n";
     while(getline(objfile, line)) {
@@ -78,7 +79,7 @@ int loadObj(const std::string filepath, Mesh& mesh) {
           }
           default : {
             std::cout << "No such type! \n";
-            exit(0);
+            return 0;
             break;
           }
         }
@@ -99,16 +100,13 @@ int loadObj(const std::string filepath, Mesh& mesh) {
     objfile.close();
   } else {
     std::cout << "Unable to open file! \n";
+    return 0;
   }
 
   mesh.centroid.x /= mesh.vertices.size();
   mesh.centroid.y /= mesh.vertices.size();
   mesh.centroid.z /= mesh.vertices.size();
-
-  // Prints Information about the mesh
-  std::cout << "Object size = " << mesh.vertices.size() << " vertices \n";
-  std::cout << "Object size = " << mesh.triangles.size() << " triangles \n";
-  std::cout << "Object size = " << mesh.normals.size() << " edges \n";
+  return 1;
 }
 
 int findType(const std::string line) {

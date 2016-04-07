@@ -2,6 +2,7 @@
 #define VISUALS_HPP
 
 #include "Mesh.hpp"
+#include <GL/glut.h>
 
 #include <iostream>
 #include <fstream>

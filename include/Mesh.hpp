@@ -12,12 +12,12 @@ public:
 	
 	void computeDualVertices(void);
 	void computeDualEdges(void);
-	void computeDualAdjacency(void);
 	void findNeighbors(void);
 	std::vector<int> findNearestNeighbors(int, float);
 	void computeNormals(void);
 	void fittoUnitSphere(void);
 	void movetoCenter(void);
+	void print(void);
 
 	virtual ~Mesh(void);
 
