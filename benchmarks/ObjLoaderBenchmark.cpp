@@ -1,17 +1,25 @@
-#include "ObjLoader.hpp"
-#include "Mesh.hpp"
+#include "../include/ObjLoader.hpp"
+#include "../include/Mesh.hpp"
 
 #include "benchmark/benchmark.h"
 
 
-static void BM_ObjLoader(benchmark::State& state) {
+static void BenchMark_ObjLoader(benchmark::State& state) {
   Mesh mesh;
-  std::string filename();
+  std::string filename("../../data/bunny.obj");
   while (state.KeepRunning())
-    loadObj()
+    loadObj(filename, mesh);
+}
+
+static void BenchMark_Vector(benchmark::State& state) {
+  std::vector<int> v;
+  while (state.KeepRunning())
+  	v.push_back(1);  
 }
 
 // Register the function as a benchmark
-BENCHMARK(BM_ObjLoader);
+BENCHMARK(BenchMark_ObjLoader);
+
+//BENCHMARK(BenchMark_Vector);
 
 BENCHMARK_MAIN();
