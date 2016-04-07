@@ -1,8 +1,9 @@
+#include "MeshComponents.hpp"
 #include "Mesh.hpp"
 
 Mesh::Mesh(void) {}
 
-virtual Mesh::~Mesh(void) {}
+Mesh::~Mesh(void) {}
 
 void Mesh::computeDualVertices(void) {
   if (triangles.size() == 0 || vertices.size() == 0) {

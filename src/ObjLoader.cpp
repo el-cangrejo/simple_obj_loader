@@ -1,5 +1,15 @@
 #include "ObjLoader.hpp"
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <iterator>
+#include <ctime>
+
 int loadObj(const std::string filepath, Mesh& mesh) {
   std::ifstream objfile;
   std::string line;
@@ -34,7 +44,7 @@ int loadObj(const std::string filepath, Mesh& mesh) {
       } else if (element == "f") {
         if (type == 0 && !std_normals.empty()) mesh.normals.resize(mesh.vertices.size());
 
-        if (type == 0) type = find_type(line);
+        if (type == 0) type = findType(line);
         int v1, v2, v3;
         int vt1, vn1;
         int vt2, vn2;

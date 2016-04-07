@@ -250,6 +250,14 @@ void renderScene(void) {
   drawAxis ();
 }
 
+void initializeGL(void) {
+  glClearColor(0.9, 0.9, 0.9, 0.0);
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_COLOR_MATERIAL);
+}
+
 void mouseClick(int button, int state, int x, int y) {
   if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON) {
       mouseClickDown = true;

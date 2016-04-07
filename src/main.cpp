@@ -2,17 +2,19 @@
 #include "Mesh.hpp"
 #include "ObjLoader.hpp"
 
+#include <GL/glut.h>
+
 extern Mesh mesh;
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
 	if (argc != 2) {
     std::cout << "usage: ./ObjLoader.out <Target Object Path>\n";
     exit(1);
   }
 	
-	loadObj(std::string(argv[1]));
-	
+	loadObj(std::string(argv[1]), mesh);
+
 	glutInit(&argc, argv);  
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
   glutInitWindowPosition(50,25);

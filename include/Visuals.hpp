@@ -1,8 +1,7 @@
 #ifndef VISUALS_HPP
 #define VISUALS_HPP
 
-#include "Open3DOR.hpp"
-#include <GL/glut.h>
+#include "Mesh.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -23,6 +22,7 @@ void drawAxis();
 // OpenGL Handling Functions
 void renderScene(void);
 void resize(int, int);
+void initializeGL(void);
 
 // Event Handling Functions
 void mouseClick(int button, int state, int x, int y);

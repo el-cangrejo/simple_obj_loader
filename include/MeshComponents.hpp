@@ -1,5 +1,5 @@
-#ifndef OPEN3DOR_HPP
-#define OPEN3DOR_HPP
+#ifndef MESHCOMPONENTS_HPP
+#define MESHCOMPONENTS_HPP
 
 #include <vector>
 #include <algorithm>
@@ -74,9 +74,4 @@ public:
 	int v3;
 };
 
-
-
-void read_mesh(const std::string, Mesh&);
-void preprocess_mesh(Mesh&);
-
-#endif // OPEN3DOR_HPP
+#endif // MESHCOMPONENTS_HPP

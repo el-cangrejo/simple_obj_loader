@@ -1,3 +1,8 @@
+#ifndef MESH_HPP
+#define MESH_HPP
+
+#include "MeshComponents.hpp"
+
 #include <vector>
 #include <string>
 
@@ -30,3 +35,5 @@ public:
 	
 	std::vector<std::vector<int>> neighbors;
 };
+
+#endif // MESH_HPP
