@@ -1,5 +1,5 @@
-#include "MeshComponents.hpp"
 #include "Mesh.hpp"
+#include "MeshComponents.hpp"
 
 Mesh::Mesh(void) {}
 
@@ -10,10 +10,10 @@ void Mesh::computeDualVertices(void) {
     std::cout << "Unitialized mesh\n";
   }
 
-  for (const auto& t : triangles) {
-    Vertex dv((vertices[t.v1].x + vertices[t.v2].x + vertices[t.v3].x)/3,
-              (vertices[t.v1].y + vertices[t.v2].y + vertices[t.v3].y)/3,
-              (vertices[t.v1].z + vertices[t.v2].z + vertices[t.v3].z)/3);
+  for (const auto &t : triangles) {
+    Vertex dv((vertices[t.v1].x + vertices[t.v2].x + vertices[t.v3].x) / 3,
+              (vertices[t.v1].y + vertices[t.v2].y + vertices[t.v3].y) / 3,
+              (vertices[t.v1].z + vertices[t.v2].z + vertices[t.v3].z) / 3);
     dvertices.push_back(dv);
   }
 }
@@ -29,12 +29,13 @@ void Mesh::computeDualEdges(void) {
       if (triangles[i].areNeighbors(triangles[j])) {
         Edge de(i, j);
         ++count;
-        auto result =std::find(dedges.begin(), dedges.end(), de);
+        auto result = std::find(dedges.begin(), dedges.end(), de);
         if (result == dedges.end()) {
           dedges.push_back(de);
         }
       }
-      if (count == 3) break;
+      if (count == 3)
+        break;
     }
   }
 }
@@ -54,7 +55,8 @@ std::vector<int> Mesh::findNearestNeighbors(int queryIdx, float radius) {
   for (int i = 0; i < vertices.size(); ++i) {
     Vertex test = vertices[i];
     Vertex dif = query - test;
-    if (dif.L2Norm() >= radius) continue;
+    if (dif.L2Norm() >= radius)
+      continue;
 
     nneighbors.push_back(i);
   }
@@ -90,9 +92,9 @@ void Mesh::computeNormals(void) {
     trinorm = trinorm.Normalize();
     trinormals.push_back(trinorm);
 
-    float theta1 = (pb-pa).Angle(pc-pa);
-    float theta2 = (pa-pb).Angle(pc-pb);
-    float theta3 = (pb-pc).Angle(pa-pc);
+    float theta1 = (pb - pa).Angle(pc - pa);
+    float theta2 = (pa - pb).Angle(pc - pb);
+    float theta3 = (pb - pc).Angle(pa - pc);
 
     norms[t.v1] = norms[t.v1] + trinorm * t.Area(vertices) * theta1;
     norms[t.v2] = norms[t.v2] + trinorm * t.Area(vertices) * theta2;
@@ -106,35 +108,37 @@ void Mesh::computeNormals(void) {
 
   end = clock();
   elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-  std::cout << "Calculating normals end : elapsed time: " << elapsed_secs << "\n";
+  std::cout << "Calculating normals end : elapsed time: " << elapsed_secs
+            << "\n";
 }
 
 void Mesh::fittoUnitSphere(void) {
-	float max_dist(0.0);
-	for (const auto &v : vertices)
-		if (max_dist < v.L2Norm()) max_dist = v.L2Norm();
+  float max_dist(0.0);
+  for (const auto &v : vertices)
+    if (max_dist < v.L2Norm())
+      max_dist = v.L2Norm();
 
-	for (auto &v : vertices) {
-		v.x /= max_dist;
-		v.y /= max_dist;
-		v.z /= max_dist;
-	}
+  for (auto &v : vertices) {
+    v.x /= max_dist;
+    v.y /= max_dist;
+    v.z /= max_dist;
+  }
 }
 
 void Mesh::movetoCenter(void) {
   for (auto &v : vertices) {
-  	v = v - centroid;
+    v = v - centroid;
   }
 }
 
 void Mesh::print(void) {
   // Prints Information about the mesh
   std::cout << "Object size : \n"
-  << this->vertices.size() << " vertices \n"
-  << this->triangles.size() << " triangles \n"
-  << this->edges.size() << " edges \n"
-  << this->normals.size() << " normals \n"
-  << this->dvertices.size() << " dvertices \n"
-  << this->dedges.size() << " dedges \n"
-  << this->trinormals.size() << " trinormals \n";
+            << this->vertices.size() << " vertices \n"
+            << this->triangles.size() << " triangles \n"
+            << this->edges.size() << " edges \n"
+            << this->normals.size() << " normals \n"
+            << this->dvertices.size() << " dvertices \n"
+            << this->dedges.size() << " dedges \n"
+            << this->trinormals.size() << " trinormals \n";
 }

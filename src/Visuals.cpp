@@ -25,7 +25,7 @@ static float eyex = 0.0;
 static float eyey = 0.0;
 static float eyez = cdist;
 static float azimuthAngle = 0.0;
-static float altitudeAngle = PI/2.;
+static float altitudeAngle = PI / 2.;
 Vertex up_vector(0, 1, 0);
 // Event handle variables
 static bool mouseClickDown = false;
@@ -34,13 +34,13 @@ static int my0 = 0;
 
 //
 static float angle_x = 0;
-static float rot_step =   5;
+static float rot_step = 5;
 
 void drawMesh(Mesh &mesh) {
   if (showVerts == true) {
     glColor3f(.9, 0.0, 0.0);
     glBegin(GL_POINTS);
-    for (const auto& v : mesh.vertices)
+    for (const auto &v : mesh.vertices)
       glVertex3f(v.x, v.y, v.z);
     glEnd();
   }
@@ -50,33 +50,27 @@ void drawMesh(Mesh &mesh) {
     glShadeModel(GL_SMOOTH);
     glColor3f(0.0, 0.0, 1.0);
     glBegin(GL_TRIANGLES);
-    //glPolygonMode(GL_FRONT, GL_FILL);
+    // glPolygonMode(GL_FRONT, GL_FILL);
     for (const auto &t : mesh.triangles) {
-      //glColor3f(0.9, 0.1, 0.1);
-      glNormal3f(mesh.normals[t.v1].x,
-                 mesh.normals[t.v1].y,
+      // glColor3f(0.9, 0.1, 0.1);
+      glNormal3f(mesh.normals[t.v1].x, mesh.normals[t.v1].y,
                  mesh.normals[t.v1].z);
-      glVertex3f(mesh.vertices[t.v1].x,
-                 mesh.vertices[t.v1].y,
+      glVertex3f(mesh.vertices[t.v1].x, mesh.vertices[t.v1].y,
                  mesh.vertices[t.v1].z);
-      //glColor3f(0.1, 0.9, 0.1);
-      glNormal3f(mesh.normals[t.v2].x,
-                 mesh.normals[t.v2].y,
+      // glColor3f(0.1, 0.9, 0.1);
+      glNormal3f(mesh.normals[t.v2].x, mesh.normals[t.v2].y,
                  mesh.normals[t.v2].z);
-      glVertex3f(mesh.vertices[t.v2].x,
-                 mesh.vertices[t.v2].y,
+      glVertex3f(mesh.vertices[t.v2].x, mesh.vertices[t.v2].y,
                  mesh.vertices[t.v2].z);
-      //glColor3f(0.1, 0.1, 0.9);
-      glNormal3f(mesh.normals[t.v3].x,
-                 mesh.normals[t.v3].y,
+      // glColor3f(0.1, 0.1, 0.9);
+      glNormal3f(mesh.normals[t.v3].x, mesh.normals[t.v3].y,
                  mesh.normals[t.v3].z);
-      glVertex3f(mesh.vertices[t.v3].x,
-                 mesh.vertices[t.v3].y,
+      glVertex3f(mesh.vertices[t.v3].x, mesh.vertices[t.v3].y,
                  mesh.vertices[t.v3].z);
     }
     glEnd();
-    //glColor3f(1.0, 0.0, 1.0);
-    //glBegin(GL_LINES);
+    // glColor3f(1.0, 0.0, 1.0);
+    // glBegin(GL_LINES);
     // for (const auto &t : mesh.triangles) {
     //   glVertex3f(mesh.vertices[t.v1].x,
     //             mesh.vertices[t.v1].y,
@@ -99,32 +93,26 @@ void drawMesh(Mesh &mesh) {
     //             mesh.vertices[t.v1].y,
     //             mesh.vertices[t.v1].z);
     // }
-    //glEnd();
+    // glEnd();
   }
   if (showLines == true) {
     glColor3f(1.0, 1.0, 0.0);
     glBegin(GL_LINES);
     for (const auto &t : mesh.triangles) {
-      glVertex3f(mesh.vertices[t.v1].x,
-                mesh.vertices[t.v1].y,
-                mesh.vertices[t.v1].z);
-      glVertex3f(mesh.vertices[t.v2].x,
-                mesh.vertices[t.v2].y,
-                mesh.vertices[t.v2].z);
+      glVertex3f(mesh.vertices[t.v1].x, mesh.vertices[t.v1].y,
+                 mesh.vertices[t.v1].z);
+      glVertex3f(mesh.vertices[t.v2].x, mesh.vertices[t.v2].y,
+                 mesh.vertices[t.v2].z);
 
-      glVertex3f(mesh.vertices[t.v2].x,
-                mesh.vertices[t.v2].y,
-                mesh.vertices[t.v2].z);
-      glVertex3f(mesh.vertices[t.v3].x,
-                mesh.vertices[t.v3].y,
-                mesh.vertices[t.v3].z);
+      glVertex3f(mesh.vertices[t.v2].x, mesh.vertices[t.v2].y,
+                 mesh.vertices[t.v2].z);
+      glVertex3f(mesh.vertices[t.v3].x, mesh.vertices[t.v3].y,
+                 mesh.vertices[t.v3].z);
 
-      glVertex3f(mesh.vertices[t.v3].x,
-                mesh.vertices[t.v3].y,
-                mesh.vertices[t.v3].z);
-      glVertex3f(mesh.vertices[t.v1].x,
-                mesh.vertices[t.v1].y,
-                mesh.vertices[t.v1].z);
+      glVertex3f(mesh.vertices[t.v3].x, mesh.vertices[t.v3].y,
+                 mesh.vertices[t.v3].z);
+      glVertex3f(mesh.vertices[t.v1].x, mesh.vertices[t.v1].y,
+                 mesh.vertices[t.v1].z);
     }
     glEnd();
   }
@@ -155,7 +143,7 @@ void drawMesh(Mesh &mesh) {
   if (showDVerts == true) {
     glColor3f(1.0, 1.0, 0.0);
     glBegin(GL_POINTS);
-    for (const auto& dv : mesh.dvertices) {
+    for (const auto &dv : mesh.dvertices) {
       glVertex3f(dv.x, dv.y, dv.z);
     }
     glEnd();
@@ -164,12 +152,10 @@ void drawMesh(Mesh &mesh) {
     glColor3f(1.0, 0.0, 1.0);
     glBegin(GL_LINES);
     for (const auto &e : mesh.edges) {
-      glVertex3f(mesh.vertices[e.v1].x,
-                mesh.vertices[e.v1].y,
-                mesh.vertices[e.v1].z);
-      glVertex3f(mesh.vertices[e.v2].x,
-                mesh.vertices[e.v2].y,
-                mesh.vertices[e.v2].z);
+      glVertex3f(mesh.vertices[e.v1].x, mesh.vertices[e.v1].y,
+                 mesh.vertices[e.v1].z);
+      glVertex3f(mesh.vertices[e.v2].x, mesh.vertices[e.v2].y,
+                 mesh.vertices[e.v2].z);
     }
     glEnd();
   }
@@ -177,12 +163,10 @@ void drawMesh(Mesh &mesh) {
     glColor3f(0.0, 1.0, 1.0);
     glBegin(GL_LINES);
     for (const auto &de : mesh.dedges) {
-      glVertex3f(mesh.dvertices[de.v1].x,
-                mesh.dvertices[de.v1].y,
-                mesh.dvertices[de.v1].z);
-      glVertex3f(mesh.dvertices[de.v2].x,
-                mesh.dvertices[de.v2].y,
-                mesh.dvertices[de.v2].z);
+      glVertex3f(mesh.dvertices[de.v1].x, mesh.dvertices[de.v1].y,
+                 mesh.dvertices[de.v1].z);
+      glVertex3f(mesh.dvertices[de.v2].x, mesh.dvertices[de.v2].y,
+                 mesh.dvertices[de.v2].z);
     }
     glEnd();
   }
@@ -191,59 +175,57 @@ void drawMesh(Mesh &mesh) {
 }
 
 void drawAxis() {
-    glPushMatrix();
-        glColor3f(0.0, 0.0, 0.0);
-        glutSolidSphere(0.05, 10, 10);
-    glPopMatrix();
+  glPushMatrix();
+  glColor3f(0.0, 0.0, 0.0);
+  glutSolidSphere(0.05, 10, 10);
+  glPopMatrix();
 
-    glBegin(GL_LINES);
-    glColor3f(1.0, 0.0, 0.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.5, 0.0, 0.0);
-    glEnd();
+  glBegin(GL_LINES);
+  glColor3f(1.0, 0.0, 0.0);
+  glVertex3f(0.0, 0.0, 0.0);
+  glVertex3f(0.5, 0.0, 0.0);
+  glEnd();
 
-    glPushMatrix();
-        glTranslatef(0.5, 0.0, 0.0);
-        glRotatef(90.0, 0.0, 1.0, 0.0);
-        glutSolidCone(0.05, 0.1, 10, 10);
-    glPopMatrix();
+  glPushMatrix();
+  glTranslatef(0.5, 0.0, 0.0);
+  glRotatef(90.0, 0.0, 1.0, 0.0);
+  glutSolidCone(0.05, 0.1, 10, 10);
+  glPopMatrix();
 
-    glBegin(GL_LINES);
-    glColor3f(0.0, 1.0, 0.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 0.5, 0.0);
-    glEnd();
+  glBegin(GL_LINES);
+  glColor3f(0.0, 1.0, 0.0);
+  glVertex3f(0.0, 0.0, 0.0);
+  glVertex3f(0.0, 0.5, 0.0);
+  glEnd();
 
-    glPushMatrix();
-        glTranslatef(0.0, 0.5, 0.0);
-        glRotatef(-90.0, 1.0, 0.0, 0.0);
-        glutSolidCone(0.05, 0.1, 10, 10);
-    glPopMatrix();
+  glPushMatrix();
+  glTranslatef(0.0, 0.5, 0.0);
+  glRotatef(-90.0, 1.0, 0.0, 0.0);
+  glutSolidCone(0.05, 0.1, 10, 10);
+  glPopMatrix();
 
-    glBegin(GL_LINES);
-    glColor3f(0.0, 0.0, 1.0);
-    glVertex3f(0.0, 0.0, 0.0);
-    glVertex3f(0.0, 0.0, 0.5);
-    glEnd();
+  glBegin(GL_LINES);
+  glColor3f(0.0, 0.0, 1.0);
+  glVertex3f(0.0, 0.0, 0.0);
+  glVertex3f(0.0, 0.0, 0.5);
+  glEnd();
 
-    glPushMatrix();
-        glTranslatef(0.0, 0.0, 0.5);
-        glutSolidCone(0.05, 0.1, 10, 10);
-    glPopMatrix();
+  glPushMatrix();
+  glTranslatef(0.0, 0.0, 0.5);
+  glutSolidCone(0.05, 0.1, 10, 10);
+  glPopMatrix();
 }
 
 void renderScene(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  gluLookAt(eyex, eyey, eyez,  // camera position
-            0,  0,  0,         // target position
-            up_vector.x,
-            up_vector.y,
-            up_vector.z);
-  
-  drawMesh (mesh);
-  drawAxis ();
+  gluLookAt(eyex, eyey, eyez, // camera position
+            0, 0, 0,          // target position
+            up_vector.x, up_vector.y, up_vector.z);
+
+  drawMesh(mesh);
+  drawAxis();
 }
 
 void initializeGL(void) {
@@ -256,68 +238,68 @@ void initializeGL(void) {
 
 void mouseClick(int button, int state, int x, int y) {
   if (state == GLUT_DOWN && button == GLUT_LEFT_BUTTON) {
-      mouseClickDown = true;
-      mx0 = x;
-      my0 = y;
+    mouseClickDown = true;
+    mx0 = x;
+    my0 = y;
   } else {
-      mouseClickDown = false;
+    mouseClickDown = false;
   }
 }
 
 void keyboardDown(unsigned char key, int x, int y) {
   switch (key) {
-  case 'i' : {
+  case 'i': {
     cdist -= zoomStep;
-    eyex = cdist*sin(altitudeAngle)*sin(azimuthAngle);
-    eyey = cdist*cos(altitudeAngle);
-    eyez = cdist*sin(altitudeAngle)*cos(azimuthAngle);
+    eyex = cdist * sin(altitudeAngle) * sin(azimuthAngle);
+    eyey = cdist * cos(altitudeAngle);
+    eyez = cdist * sin(altitudeAngle) * cos(azimuthAngle);
     break;
-    }
-  case 'o' : {
+  }
+  case 'o': {
     cdist += zoomStep;
-    eyex = cdist*sin(altitudeAngle)*sin(azimuthAngle);
-    eyey = cdist*cos(altitudeAngle);
-    eyez = cdist*sin(altitudeAngle)*cos(azimuthAngle);
+    eyex = cdist * sin(altitudeAngle) * sin(azimuthAngle);
+    eyey = cdist * cos(altitudeAngle);
+    eyez = cdist * sin(altitudeAngle) * cos(azimuthAngle);
     break;
-    }
-  case 'q' : {
+  }
+  case 'q': {
     std::cout << "User evoked exiting..\n";
     exit(0);
     break;
-    }
-  case 'v' : {
+  }
+  case 'v': {
     showVerts = !showVerts;
     break;
-    }
-  case 'l' : {
+  }
+  case 'l': {
     showLines = !showLines;
     break;
-    }
-  case 't' : {
+  }
+  case 't': {
     showTriangles = !showTriangles;
     break;
-    }
-  case 'd' : {
+  }
+  case 'd': {
     showDVerts = !showDVerts;
     break;
-    }
-  case 'e' : {
+  }
+  case 'e': {
     showEdges = !showEdges;
     break;
-    }
-  case 'k' : {
+  }
+  case 'k': {
     showDEdges = !showDEdges;
     break;
-    }
-  case 'n' : {
+  }
+  case 'n': {
     showNormals = !showNormals;
     break;
-    }
-  case 'b' : {
+  }
+  case 'b': {
     showTriNormals = !showTriNormals;
     break;
-    }
-  default : {
+  }
+  default: {
     showVerts = true;
     showLines = false;
     showTriangles = false;
@@ -328,7 +310,7 @@ void keyboardDown(unsigned char key, int x, int y) {
     target_object1 = false;
     target_object2 = false;
     break;
-    }
+  }
   }
   glutPostRedisplay();
 }
@@ -336,19 +318,24 @@ void keyboardDown(unsigned char key, int x, int y) {
 void mouseMotion(int x, int y) {
   if (mouseClickDown) {
     // Calculate angles
-    azimuthAngle  -= (x-mx0)*rotFactor;
-    altitudeAngle -= (y-my0)*rotFactor;
+    azimuthAngle -= (x - mx0) * rotFactor;
+    altitudeAngle -= (y - my0) * rotFactor;
     // Set new camrea position
-    eyex = cdist*sin(altitudeAngle)*sin(azimuthAngle);
-    eyey = cdist*cos(altitudeAngle);
-    eyez = cdist*sin(altitudeAngle)*cos(azimuthAngle);
+    eyex = cdist * sin(altitudeAngle) * sin(azimuthAngle);
+    eyey = cdist * cos(altitudeAngle);
+    eyez = cdist * sin(altitudeAngle) * cos(azimuthAngle);
 
-    if ((altitudeAngle > 2 * PI) || (altitudeAngle < -2 * PI)) altitudeAngle = 0.0;
+    if ((altitudeAngle > 2 * PI) || (altitudeAngle < -2 * PI))
+      altitudeAngle = 0.0;
 
-    if (altitudeAngle > PI) up_vector.y = -1;
-    if (altitudeAngle < PI) up_vector.y = 1;
-    if (altitudeAngle < 0) up_vector.y = -1;
-    if (altitudeAngle < -PI) up_vector.y = 1;
+    if (altitudeAngle > PI)
+      up_vector.y = -1;
+    if (altitudeAngle < PI)
+      up_vector.y = 1;
+    if (altitudeAngle < 0)
+      up_vector.y = -1;
+    if (altitudeAngle < -PI)
+      up_vector.y = 1;
     // Keep mouse x,y for next call
     mx0 = x;
     my0 = y;
@@ -361,7 +348,7 @@ void resize(int w, int h) {
   glViewport(0, 0, w, h);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45, (float)w/h, 0.01, 100);
+  gluPerspective(45, (float)w / h, 0.01, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 }
